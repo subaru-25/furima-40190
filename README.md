@@ -1,24 +1,66 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# テーブル設計
 
-Things you may want to cover:
+## users テーブル ユーザ情報
 
-* Ruby version
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+|nickname            |string  |null: false  |
+|email               |string  |null: false, unique: true|
+|encrypted_password  |string  |null: false  |
+|last_name           |string  |null: false  |
+|first_name          |string  |null: false  |
+|last_name_kana      |string  |null: false  |
+|first_name_kana     |string  |null: false  |
+|birth_date          |date    |null: false  |
 
-* System dependencies
+### Association
 
-* Configuration
+- has_many :items
+- has_many :purchase_records
 
-* Database creation
+## items テーブル 商品情報
 
-* Database initialization
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+|user                |references|null: false, foreign_key: true|
+|name                |string  |null: false  |
+|description         |text    |null: false  |
+|category_id         |integer |null: false  |
+|condition_id        |integer |null: false  |
+|shipping_cost_id    |integer |null: false  |
+|prefecture_id       |integer |null: false  |
+|shipping_day_id     |integer |null: false  |
+|price               |integer |null: false  |
 
-* How to run the test suite
+### Association
+- belongs_to :user
+- has_one :purchase_record
 
-* Services (job queues, cache servers, search engines, etc.)
+## purchase_records テーブル 購入記録情報
 
-* Deployment instructions
+| Column       | Type     | Options     |
+| ------------ | ---------| ----------- |
+|user          |references|null: false, foreign_key: true|
+|item          |references|null: false, foreign_key: true|
 
-* ...
+### Association
+- belongs_to :user
+- belongs_to :item
+- has_one :shipping_address
+
+## shipping_addresses テーブル 配送先情報
+
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+|postal_code         |string  |null: false|
+|prefecture_id       |integer |null: false|
+|city|string         |null: false|
+|addresses           |string  |null: false|
+|building            |string  |
+|phone_number        |string  |null: false|
+|purchase_record     |references|null: false, foreign_key: true|
+
+### Association
+- belongs_to :purchase_record
