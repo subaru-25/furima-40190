@@ -27,9 +27,8 @@
 |shipping_cost_id    |integer |null: false  |
 |prefecture_id       |integer |null: false  |
 |shipping_day_id     |integer |null: false  |
-|price               |integer |null: false, between: 300..9_999_999|
 
-## PurchaseRecords テーブル 購入記録情報
+## purchase_records テーブル 購入記録情報
 
 | Column       | Type     | Options     |
 | ------------ | ---------| ----------- |
@@ -37,7 +36,7 @@
 |item          |references|null: false, foreign_key: true|
 
 
-## ShippingAddresses テーブル 配送先情報
+## shipping_addresses テーブル 配送先情報
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
