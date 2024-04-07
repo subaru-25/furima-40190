@@ -15,6 +15,11 @@
 |first_name_kana     |string  |null: false  |
 |birth_date          |date    |null: false  |
 
+### Association
+
+- has_many :items
+- has_many :purchase_records
+
 ## items テーブル 商品情報
 
 | Column             | Type   | Options     |
@@ -27,6 +32,11 @@
 |shipping_cost_id    |integer |null: false  |
 |prefecture_id       |integer |null: false  |
 |shipping_day_id     |integer |null: false  |
+|price               |integer |null: false  |
+
+### Association
+- belongs_to :user
+- has_one :purchase_record
 
 ## purchase_records テーブル 購入記録情報
 
@@ -35,6 +45,10 @@
 |user          |references|null: false, foreign_key: true|
 |item          |references|null: false, foreign_key: true|
 
+### Association
+- belongs_to :user
+- belongs_to :item
+- has_one :shipping_address
 
 ## shipping_addresses テーブル 配送先情報
 
@@ -47,3 +61,6 @@
 |building            |string  |
 |phone_number        |string  |null: false|
 |purchase_record     |references|null: false, foreign_key: true|
+
+### Association
+- belongs_to :purchase_record
