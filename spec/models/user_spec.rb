@@ -1,6 +1,19 @@
 require 'rails_helper'
 RSpec.describe User, type: :model do
+
+  # ここが正常系のテストコード
+ describe 'ユーザー新規登録' do
   describe 'ユーザー新規登録' do
+    context '新規登録できるとき' do  
+      it '全ての項目が存在すれば登録できる' do
+        user = User.new(nickname: 'test', email: 'test@example.com', password: 'a12345', password_confirmation: 'a12345', last_name: 'テスト', first_name: 'テスト', last_name_kana: 'テスト', first_name_kana: 'テスト', birth_date: '2000-01-01') 
+        expect(user).to be_valid  
+      end
+    end
+  end
+
+  # 下記が異常系のテストコード
+  context '新規登録できないとき' do
     it 'nicknameが空だと登録できない' do
       user = User.new(nickname: '', email: 'test@example', password: '000000', password_confirmation: '000000')
       user.valid?
@@ -70,7 +83,7 @@ RSpec.describe User, type: :model do
     it 'passwordが要求されたフォーマット（"6文字以上かつ半角英数字混合"）でなければ登録できない' do
       user = User.new(nickname: 'test', email: 'test@example', birth_date: '2000-01-01', password: '0000000', password_confirmation: '0000000') # password is not in a mix format
       user.valid?
-      expect(user.errors.full_messages).to include("Password is invalid")
+      expect(user.errors.full_messages).to include("Password は6文字以上かつ半角英数字混合で入力してください") # Correct the expected error message
     end
 
     it 'passwordとpassword_confirmationが一致しなければ登録できない' do
@@ -79,4 +92,5 @@ RSpec.describe User, type: :model do
       expect(user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
   end
+ end
 end
