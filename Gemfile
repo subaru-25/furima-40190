@@ -53,6 +53,8 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'rspec-rails', '~> 4.0.0'
   gem 'factory_bot_rails'
+  gem 'faker', '~> 2.0' 
+  # Faker::Japaneseが使用できないためバージョンを下げます。
 end
 
 group :development do

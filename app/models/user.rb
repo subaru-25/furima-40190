@@ -8,8 +8,8 @@ class User < ApplicationRecord
          validates :nickname, presence: true
          validates :birth_date, presence: true
        
-         validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/, message: 'is invalid. Input half-width characters.' }, confirmation: true
-       
+         validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,}+\z/i, message: 'は6文字以上かつ半角英数字混合で入力してください' }
+
          validates :last_name, presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: 'は全角（漢字・ひらがな・カタカナ）で入力してください'}
          validates :first_name, presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: 'は全角（漢字・ぁ-んァ-ン一-龥）で入力してください'}
        
