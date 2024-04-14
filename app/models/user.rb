@@ -5,6 +5,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+         has_many :items #テストコード
+
          validates :nickname, presence: true
          validates :birth_date, presence: true
        

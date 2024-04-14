@@ -13,14 +13,15 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     end
 
-  def create
-    @item = Item.new(item_params)
-    if @item.save
-      redirect_to root_path # 成功したらトップページにリダイレクト
-    else
-      render :new # 失敗したらnewアクションを再度呼び出す
+    def create
+      @item = Item.new(item_params)
+      @item.user = current_user 
+      if @item.save
+        redirect_to root_path # 成功したらトップページにリダイレクト
+      else
+        render :new # 失敗したらnewアクションを再度呼び出す
+      end
     end
-  end
 
   private
 

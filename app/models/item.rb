@@ -5,6 +5,7 @@ class Item < ApplicationRecord
   belongs_to :shipping_fee_burden
   belongs_to :prefecture
   belongs_to :shipping_time
+  belongs_to :user
 
   has_one_attached :image
   validates :image, presence: true# 商品画像はActive Storageを利用
