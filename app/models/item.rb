@@ -1,10 +1,10 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :category_id
-  belongs_to :condition_id
-  belongs_to :shipping_fee_burden_id
-  belongs_to :prefecture_id
-  belongs_to :shipping_time_id
+  belongs_to :category
+  belongs_to :condition
+  belongs_to :shipping_fee_burden
+  belongs_to :prefecture
+  belongs_to :shipping_time
 
   has_one_attached :image
   validates :image, presence: true# 商品画像はActive Storageを利用
