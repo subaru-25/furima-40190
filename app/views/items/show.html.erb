@@ -18,9 +18,9 @@
       <span class="item-price">
         <%= @item.price %>
       </span>
-      <span class="item-postage">
-        <%= @shipping_fee_burden %>
-      </span>
+     <span class="item-postage">
+      <%= @item.shipping_fee_burden_id.name %>
+     </span>
     </div>
 
     <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
@@ -49,7 +49,7 @@
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
-          <td class="detail-value"><%= @item.ategory %></td>
+          <td class="detail-value"><%= @item.category_id.name %></td>
         </tr>
         <tr>
           <th class="detail-item">商品の状態</th>
@@ -57,15 +57,15 @@
         </tr>
         <tr>
           <th class="detail-item">配送料の負担</th>
-          <td class="detail-value"><%= @item.shipping_fee_burden %></td>
+          <td class="detail-value"><%= @item.shipping_fee_burden_id.name %></td>
         </tr>
         <tr>
           <th class="detail-item">発送元の地域</th>
-          <td class="detail-value"><%= @item.prefecture %></td>
+          <td class="detail-value"><%= @item.prefecture_id.name %></td>
         </tr>
         <tr>
           <th class="detail-item">発送日の目安</th>
-          <td class="detail-value"><%= @item.shipping_time %></td>
+          <td class="detail-value"><%= @item.shipping_time_id.name %></td>
         </tr>
       </tbody>
     </table>
@@ -105,7 +105,7 @@
     </a>
   </div>
   <%# 詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
-  <a href="#" class="another-item"><%= @item.category %>をもっと見る</a>
+  <a href="#" class="another-item"><%= @item.category_id.name %>をもっと見る</a>
   <%# //詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
 </div>
 

@@ -52,11 +52,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_13_154503) do
   create_table "items", charset: "utf8", force: :cascade do |t|
     t.string "item_name"
     t.text "item_info"
-    t.integer "category"
-    t.integer "condition"
-    t.integer "shipping_fee_burden"
-    t.integer "prefecture"
-    t.integer "shipping_time"
+    t.integer "category_id"
+    t.integer "condition_id"
+    t.integer "shipping_fee_burden_id"
+    t.integer "prefecture_id"
+    t.integer "shipping_time_id"
     t.integer "item_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
