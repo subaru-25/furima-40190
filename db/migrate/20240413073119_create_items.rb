@@ -2,8 +2,8 @@ class CreateItems < ActiveRecord::Migration[7.0]
   def change
     create_table :items do |t|
       # 商品画像はActive Storageを利用
-      t.string :item_name # 商品名
-      t.text :item_info # 商品の説明
+      t.string :item_name, null: false # 商品名
+      t.text :item_info, null: false # 商品の説明
 
       t.integer :category_id # カテゴリー
       t.integer :condition_id # 商品の状態
@@ -14,6 +14,7 @@ class CreateItems < ActiveRecord::Migration[7.0]
 
       t.integer :item_price # 価格
       t.timestamps
+      t.references :user, null: false, foreign_key: true #userの外部キーカラムを追加
     end
   end
 end
