@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
       if @item.save
         redirect_to root_path # 成功したらトップページにリダイレクト
       else
-        render :new # 失敗したらnewアクションを再度呼び出す
+        render :new, status: :unprocessable_entity # 失敗したらnewアクションを再度呼び出す
       end
     end
 

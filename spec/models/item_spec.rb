@@ -13,6 +13,14 @@ end
 
 
  # 下記が異常系のテストコード
+
+   # userがログインしていないと登録できない
+   it 'userが紐づいていなければ登録できないこと' do
+    @item.user = nil
+    @item.valid?
+    expect(@item.errors.full_messages).to include("User must exist")
+  end
+
   # imageは0枚では登録できない
   it '画像が存在しないと保存できないこと' do
     @item.image = nil
