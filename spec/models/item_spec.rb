@@ -7,12 +7,14 @@ RSpec.describe Item, type: :model do
   end
 
  # ここが正常系のテストコード
-it '全ての値が入っていれば登録できる' do
-  expect(@item).to be_valid
+ context '商品が出品できるとき' do
+  it '全ての値が入っていれば登録できる' do
+    expect(@item).to be_valid
+  end
 end
 
-
  # 下記が異常系のテストコード
+ context '商品が出品できないとき' do
 
    # userがログインしていないと登録できない
    it 'userが紐づいていなければ登録できないこと' do
@@ -111,4 +113,5 @@ end
       @item.valid?
       expect(@item.errors.full_messages).to include('Item price is not a number')
     end
+  end
   end
