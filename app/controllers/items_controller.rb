@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create] 
 
   def index
-    # @items = Item.all 商品一覧機能実装時に差分として出力するため
+    @items = Item.all 
   end
 
   def new
