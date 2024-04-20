@@ -9,9 +9,9 @@ class ItemsController < ApplicationController
     @item = Item.new
   end
 
-  # def show 商品一覧機能実装時に差分として出力するため
-  #   @item = Item.find(params[:id])
-  #   end
+   def show 
+     @item = Item.find(params[:id])
+   end
 
     def create
       @item = Item.new(item_params)
