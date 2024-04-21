@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit]
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
     @items = Item.order(created_at: :desc) 
@@ -36,6 +36,19 @@ class ItemsController < ApplicationController
       else
         logger.debug(@item.errors.full_messages)
         render :edit, status: :unprocessable_entity
+      end
+    end
+
+    def destroy
+      # ログイン中のユーザーが出品者である場合、商品を削除
+      if current_user.id == @item.user_id
+        if @item.destroy
+          redirect_to root_path
+        else
+          render :show
+        end
+      else
+        redirect_to root_path
       end
     end
 
