@@ -18,7 +18,7 @@
 ### Association
 
 - has_many :items
-- has_many :purchase_records
+- has_many :orders
 
 ## items テーブル 商品情報
 
@@ -57,7 +57,7 @@
 |postal_code         |string  |null: false|
 |prefecture_id       |integer |null: false|
 |city|string         |null: false|
-|addresses           |string  |null: false|
+|block               |string  |null: false|
 |building            |string  |
 |phone_number        |string  |null: false|
 |purchase_record     |references|null: false, foreign_key: true|
