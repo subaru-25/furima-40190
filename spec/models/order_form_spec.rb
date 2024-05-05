@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Address, type: :model do
   before do
-    @order_form = FactoryBot.build(:order_form, postal_code: "123-4567", phone_number: "09012345678")
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item)
+    sleep(1) 
+    @order_form = FactoryBot.build(:order_form,user_id: user.id, item_id: item.id)
   end
 
   # ここが正常系のテストコード
@@ -50,7 +53,7 @@ RSpec.describe Address, type: :model do
     it '都道府県が空だと登録できない' do
       @order_form.prefecture_id = ''
       @order_form.valid?
-      expect(@order_form.errors.full_messages).to include("Prefecture can't be blank")  
+      expect(@order_form.errors.full_messages).to include("Prefecture を選択してください")  
     end
 
     it '市区町村が空だと登録できない' do

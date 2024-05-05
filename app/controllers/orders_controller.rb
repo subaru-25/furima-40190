@@ -1,14 +1,13 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index]
-  before_action :redirect_if_sold_out_or_own_product, only: [:index]
+  before_action :load_item, only: [:index, :create, :redirect_if_sold_out_or_own_product]
+
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-    @item = Item.find(params[:item_id]) 
     @order_form = OrderForm.new
   end
 
-  def create 
-    @item = Item.find(params[:item_id])
+  def create
     @order_form = OrderForm.new(order_params.merge(user_id: current_user.id, price: @item.item_price))
     if @order_form.valid?
       pay_item
@@ -21,6 +20,10 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def load_item
+    @item = Item.find(params[:item_id])
+  end
 
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
@@ -36,10 +39,8 @@ class OrdersController < ApplicationController
   end
 
   def redirect_if_sold_out_or_own_product
-    item = Item.find(params[:item_id])
-    if (item.order.present?) || (item.user_id == current_user.id) 
+    if (@item.order.present?) || (@item.user_id == current_user.id)
       redirect_to root_path
     end
   end
-
 end
