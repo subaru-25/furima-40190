@@ -12,6 +12,10 @@ DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:migrate:reset
 # bundle exec rails generate migration DropAddressesTable
 # bundle exec rake db:migrate
 
-# ordersテーブルの削除
-bundle exec rails generate migration DropOrdersTable
+# # ordersテーブルの削除
+# bundle exec rails generate migration DropOrdersTable
+# bundle exec rake db:migrate
+
+# # itemsテーブルの削除
+bundle exec rails generate migration DropItemsTable
 bundle exec rake db:migrate
