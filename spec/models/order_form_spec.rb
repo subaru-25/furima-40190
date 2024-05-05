@@ -11,6 +11,10 @@ RSpec.describe Address, type: :model do
       expect(@order_form).to be_valid
     end
 
+    it "priceとtokenがあれば保存ができること" do
+      expect(@order_form).to be_valid
+    end
+
     it '建物名は任意である' do
       @order_form.building = ''
       expect(@order_form).to be_valid
@@ -85,5 +89,11 @@ RSpec.describe Address, type: :model do
       expect(@order_form.errors.full_messages).to include("Phone number は不正な値です")
     end
     
+    it "tokenが空では保存ができないこと" do
+      @order_form.token = nil
+      @order_form.valid?
+      expect(@order_form.errors.full_messages).to include("Token can't be blank")
+    end
+
   end
  end

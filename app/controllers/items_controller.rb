@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :redirect_if_sold, only: [:edit, :update] # 自身が出品した売却済み商品の商品情報編集ページへ遷移しようとすると、トップページに遷移
 
   def index
     @items = Item.order(created_at: :desc) 
@@ -61,4 +62,11 @@ class ItemsController < ApplicationController
     def set_item
       @item = Item.find(params[:id])
     end
+
+    def redirect_if_sold # 自身が出品した売却済み商品の商品情報編集ページへ遷移しようとすると、トップページに遷移
+      if @item.order.present?
+        redirect_to root_path
+      end
+    end
+
   end

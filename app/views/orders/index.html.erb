@@ -1,3 +1,4 @@
+<%= include_gon %>
 <%= render "shared/second-header"%>
 
 <div class='transaction-contents'>
@@ -5,20 +6,20 @@
     <h1 class='transaction-title-text'>
       購入内容の確認
     </h1>
-    <%# 購入内容の表示 %>
-    <div class='buy-item-info'>
-      <%= image_tag "item-sample.png", class: 'buy-item-img' %>
-      <div class='buy-item-right-content'>
-        <h2 class='buy-item-text'>
-          <%= @item.item_name %>
-        </h2>
-        <div class='buy-item-price'>
-          <p class='item-price-text'>¥<%= '999,999,999' %></p>
-          <p class='item-price-sub-text'><%= '配送料負担' %></p>
-        </div>
-      </div>
+<%# 購入内容の表示 %>
+<div class='buy-item-info'>
+  <%= image_tag @item.image, class: 'buy-item-img' %>
+  <div class='buy-item-right-content'>
+    <h2 class='buy-item-text'>
+      <%= @item.item_name %>
+    </h2>
+    <div class='buy-item-price'>
+      <p class='item-price-text'>¥<%= @item.item_price %></p>
+      <p class='item-price-sub-text'><%= @item.shipping_fee_burden.name %></p>
     </div>
-    <%# /購入内容の表示 %>
+  </div>
+</div>
+<%# /購入内容の表示 %>
 
     <%# 支払額の表示 %>
     <div class='item-payment'>
@@ -45,7 +46,9 @@
           <label class="form-text">カード情報</label>
           <span class="indispensable">必須</span>
         </div>
-        <div id="number-form" class="input-default"></div>
+        <div id="number-form" class="input-default">
+          <%# <input type="text" id="card-number" name="card-number" placeholder="カード番号"> %>
+        </div>
         <div class='available-card'>
           <%= image_tag 'card-visa.gif', class: 'card-logo'%>
           <%= image_tag 'card-mastercard.gif', class: 'card-logo'%>
@@ -59,7 +62,9 @@
           <span class="indispensable">必須</span>
         </div>
         <div class='input-expiration-date-wrap'>
-          <div id="expiry-form" class="input-default"></div>
+          <div id="expiry-form" class="input-default">
+            <%# <input type="text" id="card-expiry" name="card-expiry" placeholder="月/年"> %>
+          </div>
         </div>
       </div>
       <div class="form-group">
@@ -67,7 +72,9 @@
           <label class="form-text">セキュリティコード</label>
           <span class="indispensable">必須</span>
         </div>
-        <div id="cvc-form" class="input-default"></div>
+        <div id="cvc-form" class="input-default">
+          <%# <input type="text" id="card-cvc" name="card-cvc" placeholder="CVC"> %>
+        </div>
       </div>
     </div>
     <%# /カード情報の入力 %>
