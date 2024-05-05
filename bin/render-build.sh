@@ -5,8 +5,8 @@ set -o errexit
 bundle install
 bundle exec rake assets:precompile
 bundle exec rake assets:clean
-# bundle exec rake db:migrate
-DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:migrate:reset
+bundle exec rake db:migrate
+
 
 # # addressesテーブルの削除
 # bundle exec rails generate migration DropAddressesTable
@@ -17,5 +17,5 @@ DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:migrate:reset
 # bundle exec rake db:migrate
 
 # # itemsテーブルの削除
-bundle exec rails generate migration DropItemsTable
-bundle exec rake db:migrate
+# bundle exec rails generate migration DropItemsTable
+# bundle exec rake db:migrate
