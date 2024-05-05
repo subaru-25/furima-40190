@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order_form = OrderForm.new(order_params.merge(user_id: current_user.id, price: @item.item_price))
+    @order_form = OrderForm.new(order_params) 
     if @order_form.valid?
       pay_item
       @order_form.save
@@ -28,14 +28,14 @@ class OrdersController < ApplicationController
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
-      amount: @order_form.price, # 商品の値段
+      amount: @item.item_price, # 商品の値段
       card: @order_form.token, # カードトークン
-      currency: 'jpy'    # 通貨の種類（日本円）
+      currency: 'jpy' # 通貨の種類（日本円）
     )
   end
 
   def order_params
-    params.require(:order_form).permit(:postal_code, :prefecture_id, :city, :block, :building, :phone_number, :token).merge(item_id: params[:item_id], token: params[:token])
+    params.require(:order_form).permit(:postal_code, :prefecture_id, :city, :block, :building, :phone_number, :token).merge(item_id: params[:item_id], token: params[:token], user_id: current_user.id) 
   end
 
   def redirect_if_sold_out_or_own_product

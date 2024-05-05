@@ -56,6 +56,12 @@ RSpec.describe Address, type: :model do
       expect(@order_form.errors.full_messages).to include("Prefecture を選択してください")  
     end
 
+    it '都道府県が "---" では登録できない' do
+      @order_form.prefecture_id = 1 
+      @order_form.valid?
+      expect(@order_form.errors.full_messages).to include("Prefecture を選択してください")  
+    end
+
     it '市区町村が空だと登録できない' do
       @order_form.city = ''
       @order_form.valid?

@@ -18,7 +18,7 @@
 ### Association
 
 - has_many :items
-- has_many :purchase_records
+- has_many :orders
 
 ## items テーブル 商品情報
 
@@ -60,7 +60,7 @@
 |block               |string  |null: false|
 |building            |string  |
 |phone_number        |string  |null: false|
-|order               |references|null: false, foreign_key: true|
+|purchase_record     |references|null: false, foreign_key: true|
 
 ### Association
 - belongs_to :purchase_record
